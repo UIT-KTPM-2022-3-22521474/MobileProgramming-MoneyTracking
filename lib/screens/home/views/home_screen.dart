@@ -1,81 +1,85 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import '../../main/view/main_screen.dart';
-import '../../stat/stat/stat_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
-  var wigetList = {
-    const MainScreen(),
-    const StatScreen(),
-  };
-
-  int index = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(30)
-        ),
-        child: BottomNavigationBar(
-            onTap: (value) {
-              setState(() {
-                index = value;
-              });
-            },
-            backgroundColor: Colors.white,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            elevation: 3,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: "Home"
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        child: Column(
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.cyanAccent.shade400
+                            ),
+                          ),
+                          Icon(
+                            Icons.person_2_rounded,
+                            color: Colors.cyanAccent.shade700,
+                          )
+                        ],
+                      ),
+                      const SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome!",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.outline
+                            ),
+                          ),
+                          Text(
+                            "SE347!",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.onBackground
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
+                ]
+            ),
+            const SizedBox(height: 20,),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.width / 2,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.secondary,
+                      Theme.of(context).colorScheme.tertiary,
+                    ],
+                    transform: const GradientRotation(pi / 4),
+                  ),
+                  borderRadius: BorderRadius.circular(25)
               ),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart),
-                  label: "Stats"
-              )
-            ]
+            )
+          ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          shape: const CircleBorder(),
-          child: Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.primary,
-                    Theme.of(context).colorScheme.secondary,
-                    Theme.of(context).colorScheme.tertiary,
-                  ],
-                  transform: const GradientRotation(pi / 4),
-                )
-            ),
-            child: const Icon(
-                Icons.add
-            ),
-          )
-      ),
-      body: index == 0
-          ? const MainScreen()
-          : const StatScreen(),
     );
   }
 }

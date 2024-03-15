@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/home/views/home_screen.dart';
+
+import 'screens/main/main_screen.dart';
 
 class MyAppView extends StatelessWidget {
   const MyAppView({super.key});
@@ -18,7 +19,7 @@ class MyAppView extends StatelessWidget {
           tertiary: const Color(0xFFB2EBF2)
         )
       ),
-      home: const HomeScreen(),
+      home: const MainScreen(),
     );
   }
 }
